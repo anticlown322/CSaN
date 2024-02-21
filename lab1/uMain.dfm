@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 610
     Height = 694
-    ActivePage = tsHelp
+    ActivePage = tsMain
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
@@ -51,6 +51,7 @@ object frmMain: TfrmMain
       Caption = 'tsMain'
       ImageIndex = 1
       TabVisible = False
+      OnMouseDown = Dragging
       object lbScanerTitle: TLabel
         AlignWithMargins = True
         Left = 3
@@ -66,6 +67,7 @@ object frmMain: TfrmMain
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        OnMouseDown = Dragging
         ExplicitWidth = 107
       end
       object shpVigenereKey: TShape
@@ -78,6 +80,7 @@ object frmMain: TfrmMain
         Brush.Color = 6574152
         Pen.Style = psClear
         Shape = stRoundRect
+        OnMouseDown = Dragging
         ExplicitTop = 42
       end
       object spdbtnSaveFile: TSpeedButton
@@ -103,7 +106,7 @@ object frmMain: TfrmMain
         Left = 3
         Top = 116
         Width = 596
-        Height = 554
+        Height = 565
         Align = alTop
         BevelOuter = bvNone
         Caption = 'pVigenereInput'
@@ -118,7 +121,7 @@ object frmMain: TfrmMain
           Left = 13
           Top = 10
           Width = 570
-          Height = 534
+          Height = 545
           Margins.Top = 10
           Margins.Bottom = 10
           Align = alClient
@@ -135,6 +138,7 @@ object frmMain: TfrmMain
           ReadOnly = True
           ScrollBars = ssVertical
           TabOrder = 0
+          ExplicitHeight = 543
         end
       end
     end

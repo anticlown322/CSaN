@@ -96,18 +96,12 @@ End;
 
 Procedure TfrmMain.ActStartScanExecute(Sender: TObject);
 Var
-    Answer: TNetworkInterfaceList;
+    Answer: TStringList;
 Begin
-    If GetNetworkInterfaces(Answer) Then
-        For Var I := Low(Answer) To High(Answer) Do
-        Begin
-            MmOutput.Lines.Add('Номер: ' + Inttostr(I));
-            MmOutput.Lines.Add('Имя: ' + Answer[I].ComputerName);
-            MmOutput.Lines.Add('IP: ' + Answer[I].AddrIP);
-            MmOutput.Lines.Add('Маска сети: ' + Answer[I].SubnetMask);
-            MmOutput.Lines.Add('Номер сети: ' + Answer[I].AddrNet);
-            MmOutput.Lines.Add('--------------------------------------');
-        End;
+    Answer := TStringList.Create;
+    ScanNetwork(Answer);
+    MmOutput.Text := Answer.Text;
+    Answer.Free;
 End;
 
 { action manager - form }
