@@ -1,19 +1,20 @@
 Program NetScanner;
 
-Uses
-    Vcl.Forms,
-    UMain In 'uMain.pas' {frmMain} ,
-    UdtmdImages In 'udtmdImages.pas' {dtmdImages: TDataModule} ,
-    UTScanner In 'uTScanner.pas',
-    UFormEnhances In 'uFormEnhances.pas';
+uses
+  Vcl.Forms,
+  uMain in 'uMain.pas' {frmMain},
+  udtmdImages in 'udtmdImages.pas' {dtmdImages: TDataModule},
+  uTScanner in 'uTScanner.pas',
+  uFormEnhances in 'uFormEnhances.pas';
 
 {$R *.res}
 
 Begin
     Application.Initialize;
-    // Application.MainFormOnTaskbar := True;
-    Application.CreateForm(TfrmMain, FrmMain);
-    Application.CreateForm(TdtmdImages, DtmdImages);
-    Application.Run;
+    Application.MainFormOnTaskbar := False;
+
+    Application.CreateForm(TFrmMain, FrmMain);
+  Application.CreateForm(TDtmdImages, DtmdImages);
+  Application.Run;
 
 End.
