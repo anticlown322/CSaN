@@ -23,7 +23,8 @@ Uses
     Vcl.ActnMan,
     System.ImageList,
     Vcl.ImgList,
-    Vcl.VirtualImageList;
+    Vcl.VirtualImageList,
+    UTScanner;
 
 Type
     TfrmMain = Class(TForm)
@@ -52,15 +53,14 @@ Type
         SpdbtnSaveFile: TSpeedButton;
         SpdbtnScan: TSpeedButton;
         ActGoToGithub: TAction;
-    lbTradeMark: TLabel;
+        LbTradeMark: TLabel;
         Procedure Dragging(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); // custom
         Procedure ActCloseExecute(Sender: TObject);
         Procedure FormShow(Sender: TObject);
         Procedure ActChooseOptionExecute(Sender: TObject);
         Procedure FormCreate(Sender: TObject);
         Procedure ActGoToGithubExecute(Sender: TObject);
-    Private
-
+        Procedure ActStartScanExecute(Sender: TObject);
     End;
 
 Var
@@ -70,7 +70,6 @@ Implementation
 
 Uses
     UdtmdImages,
-    UTScanner,
     UFormEnhances,
     ShellApi; // for shellexecute
 
@@ -94,6 +93,22 @@ Begin
 End;
 
 { action manager - scaner }
+
+Procedure TfrmMain.ActStartScanExecute(Sender: TObject);
+Var
+    Answer: TNetworkInterfaceList;
+Begin
+    If GetNetworkInterfaces(Answer) Then
+        For Var I := Low(Answer) To High(Answer) Do
+        Begin
+            MmOutput.Lines.Add('Номер: ' + Inttostr(I));
+            MmOutput.Lines.Add('Имя: ' + Answer[I].ComputerName);
+            MmOutput.Lines.Add('IP: ' + Answer[I].AddrIP);
+            MmOutput.Lines.Add('Маска сети: ' + Answer[I].SubnetMask);
+            MmOutput.Lines.Add('Номер сети: ' + Answer[I].AddrNet);
+            MmOutput.Lines.Add('--------------------------------------');
+        End;
+End;
 
 { action manager - form }
 
