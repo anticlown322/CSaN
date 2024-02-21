@@ -1,6 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
+  AlphaBlend = True
   AlphaBlendValue = 250
   BorderStyle = bsNone
   Caption = #1057#1082#1072#1085#1077#1088' '#1089#1077#1090#1080
@@ -21,7 +22,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 610
     Height = 694
-    ActivePage = tsMain
+    ActivePage = tsHelp
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
@@ -55,28 +56,29 @@ object frmMain: TfrmMain
         Left = 3
         Top = 3
         Width = 596
-        Height = 33
+        Height = 35
         Align = alTop
         Alignment = taCenter
         Caption = #1057#1082#1072#1085#1077#1088
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clGray
-        Font.Height = -27
+        Font.Height = -29
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitWidth = 101
+        ExplicitWidth = 107
       end
       object shpVigenereKey: TShape
         AlignWithMargins = True
         Left = 3
-        Top = 42
+        Top = 44
         Width = 596
         Height = 66
         Align = alTop
         Brush.Color = 6574152
         Pen.Style = psClear
         Shape = stRoundRect
+        ExplicitTop = 42
       end
       object spdbtnSaveFile: TSpeedButton
         Left = 332
@@ -99,7 +101,7 @@ object frmMain: TfrmMain
       object pOutput: TPanel
         AlignWithMargins = True
         Left = 3
-        Top = 114
+        Top = 116
         Width = 596
         Height = 554
         Align = alTop
@@ -111,7 +113,6 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitTop = 127
         object mmOutput: TMemo
           AlignWithMargins = True
           Left = 13
@@ -134,7 +135,6 @@ object frmMain: TfrmMain
           ReadOnly = True
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitHeight = 140
         end
       end
     end
@@ -159,8 +159,6 @@ object frmMain: TfrmMain
           ' '#1088#1072#1073#1086#1090#1072#1077#1090' '#1087#1088#1086#1075#1088#1072#1084#1084#1072'.'
         WordWrap = True
         OnMouseDown = Dragging
-        ExplicitLeft = 0
-        ExplicitTop = 0
         ExplicitWidth = 563
         ExplicitHeight = 161
       end
@@ -375,6 +373,7 @@ object frmMain: TfrmMain
     end
     object actStartScan: TAction
       Category = 'Scaner'
+      OnExecute = actStartScanExecute
     end
     object actSaveFile: TAction
       Category = 'Scaner'
