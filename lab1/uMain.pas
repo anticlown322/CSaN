@@ -24,17 +24,21 @@ Uses
     System.ImageList,
     Vcl.ImgList,
     Vcl.VirtualImageList,
-    UTScanner;
+    IdBaseComponent,
+    IdComponent,
+    IdRawBase,
+    IdRawClient,
+    IdIcmpClient;
 
 Type
     TfrmMain = Class(TForm)
         PgcSections: TPageControl;
         TsWelcome: TTabSheet;
-        TsMain: TTabSheet;
+        TsInterfaces: TTabSheet;
         VimWelcomeBackground: TVirtualImage;
         PNav: TPanel;
-        SpdbtnTurningGrille: TSpeedButton;
-        SpdbtnVigenere: TSpeedButton;
+        SpdbtnWelcome: TSpeedButton;
+        SpdbtnInterfaces: TSpeedButton;
         SpdbtnExit: TSpeedButton;
         SpdbtnHelp: TSpeedButton;
         VilButtons48: TVirtualImageList;
@@ -42,25 +46,34 @@ Type
         ActmngActions: TActionManager;
         ActClose: TAction;
         ActChooseOption: TAction;
-        ActStartScan: TAction;
-        ActSaveFile: TAction;
+        ActStartInterfaces: TAction;
         LbHelp: TLabel;
         LbHelpTitle: TLabel;
-        LbScanerTitle: TLabel;
+        LbInterfacesTitle: TLabel;
         POutput: TPanel;
-        MmOutput: TMemo;
-        ShpVigenereKey: TShape;
-        SpdbtnSaveFile: TSpeedButton;
-        SpdbtnScan: TSpeedButton;
+        MmInterfacesOutput: TMemo;
+        ShpInterfaces: TShape;
+        SpdbtnInterfacesIPHlp: TSpeedButton;
         ActGoToGithub: TAction;
         LbTradeMark: TLabel;
+        SpdbtnInterfacesWinAPI: TSpeedButton;
+        SpdbtnDevices: TSpeedButton;
+        TsDevices: TTabSheet;
+        LbDevicesTtile: TLabel;
+        ShpDevices: TShape;
+        PDevices: TPanel;
+        MmDevices: TMemo;
+        ActStartDevices: TAction;
+        SpdbtnStartDevicesARP: TSpeedButton;
+        SpdbtnStartDevicesPing: TSpeedButton;
         Procedure Dragging(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); // custom
         Procedure ActCloseExecute(Sender: TObject);
         Procedure FormShow(Sender: TObject);
         Procedure ActChooseOptionExecute(Sender: TObject);
         Procedure FormCreate(Sender: TObject);
         Procedure ActGoToGithubExecute(Sender: TObject);
-        Procedure ActStartScanExecute(Sender: TObject);
+        Procedure ActStartInterfacesExecute(Sender: TObject);
+        Procedure ActStartDevicesExecute(Sender: TObject);
     End;
 
 Var
@@ -71,7 +84,9 @@ Implementation
 Uses
     UdtmdImages,
     UFormEnhances,
-    ShellApi; // for shellexecute
+    ShellApi,
+    UHostsScanner,
+    UInterfacesScanner;
 
 {$R *.dfm}
 { form methods }
@@ -94,13 +109,38 @@ End;
 
 { action manager - scaner }
 
-Procedure TfrmMain.ActStartScanExecute(Sender: TObject);
+Procedure TfrmMain.ActStartInterfacesExecute(Sender: TObject);
 Var
-    Answer: TStringList;
+    Answer: TStringlist;
 Begin
-    Answer := TStringList.Create;
-    ScanNetwork(Answer);
-    MmOutput.Text := Answer.Text;
+    MmInterfacesOutput.Clear;
+    Answer := Tstringlist.Create;
+    Case (Sender As TAction).ActionComponent.Tag Of
+        1:
+            ScanNetworkIphlpAPI(Answer);
+        2:
+            ScanNetworkWinAPI(Answer);
+    End;
+    MmInterfacesOutput.Text := Answer.Text;
+    Answer.Free;
+End;
+
+Procedure TfrmMain.ActStartDevicesExecute(Sender: TObject);
+Var
+    Answer: TStringlist;
+Begin
+    MmDevices.Clear;
+    Answer := TStringlist.Create;
+
+    Case (Sender As TAction).ActionComponent.Tag Of
+        1:
+            ScanDevicesARP(Answer);
+        2:
+            Begin
+            End;
+    End;
+
+    MmDevices.Text := Answer.Text;
     Answer.Free;
 End;
 

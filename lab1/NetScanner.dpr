@@ -4,8 +4,9 @@ uses
   Vcl.Forms,
   uMain in 'uMain.pas' {frmMain},
   udtmdImages in 'udtmdImages.pas' {dtmdImages: TDataModule},
-  uTScanner in 'uTScanner.pas',
-  uFormEnhances in 'uFormEnhances.pas';
+  uInterfacesScanner in 'uInterfacesScanner.pas',
+  uFormEnhances in 'uFormEnhances.pas',
+  uHostsScanner in 'uHostsScanner.pas';
 
 {$R *.res}
 
