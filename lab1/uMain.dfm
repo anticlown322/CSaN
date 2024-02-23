@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 610
     Height = 694
-    ActivePage = tsMain
+    ActivePage = tsDevices
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
@@ -47,12 +47,12 @@ object frmMain: TfrmMain
         ExplicitHeight = 105
       end
     end
-    object tsMain: TTabSheet
-      Caption = 'tsMain'
+    object tsInterfaces: TTabSheet
+      Caption = 'tsInterfaces'
       ImageIndex = 1
       TabVisible = False
       OnMouseDown = Dragging
-      object lbScanerTitle: TLabel
+      object lbInterfacesTitle: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 3
@@ -60,7 +60,7 @@ object frmMain: TfrmMain
         Height = 35
         Align = alTop
         Alignment = taCenter
-        Caption = #1057#1082#1072#1085#1077#1088
+        Caption = #1057#1082#1072#1085#1077#1088' '#1080#1085#1090#1077#1088#1092#1077#1081#1089#1086#1074
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clGray
         Font.Height = -29
@@ -68,9 +68,9 @@ object frmMain: TfrmMain
         Font.Style = [fsBold]
         ParentFont = False
         OnMouseDown = Dragging
-        ExplicitWidth = 107
+        ExplicitWidth = 317
       end
-      object shpVigenereKey: TShape
+      object shpInterfaces: TShape
         AlignWithMargins = True
         Left = 3
         Top = 44
@@ -83,22 +83,24 @@ object frmMain: TfrmMain
         OnMouseDown = Dragging
         ExplicitTop = 42
       end
-      object spdbtnSaveFile: TSpeedButton
-        Left = 332
-        Top = 49
+      object spdbtnInterfacesIPHlp: TSpeedButton
+        Tag = 1
+        Left = 12
+        Top = 51
         Width = 250
         Height = 50
-        Action = actSaveFile
-        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083
+        Action = actStartInterfaces
+        Caption = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100'(IPhlpAPI)'
         Flat = True
       end
-      object spdbtnScan: TSpeedButton
-        Left = 20
-        Top = 49
+      object spdbtnInterfacesWinAPI: TSpeedButton
+        Tag = 2
+        Left = 336
+        Top = 51
         Width = 250
         Height = 50
-        Action = actStartScan
-        Caption = #1055#1088#1086#1089#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100
+        Action = actStartInterfaces
+        Caption = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100'(WinAPI)'
         Flat = True
       end
       object pOutput: TPanel
@@ -116,7 +118,7 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        object mmOutput: TMemo
+        object mmInterfacesOutput: TMemo
           AlignWithMargins = True
           Left = 13
           Top = 10
@@ -138,7 +140,102 @@ object frmMain: TfrmMain
           ReadOnly = True
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitHeight = 543
+        end
+      end
+    end
+    object tsDevices: TTabSheet
+      Caption = 'tsDevices'
+      ImageIndex = 3
+      TabVisible = False
+      OnMouseDown = Dragging
+      object lbDevicesTtile: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 596
+        Height = 35
+        Align = alTop
+        Alignment = taCenter
+        Caption = #1057#1082#1072#1085#1077#1088' '#1093#1086#1089#1090#1086#1074
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clGray
+        Font.Height = -29
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnMouseDown = Dragging
+        ExplicitWidth = 218
+      end
+      object shpDevices: TShape
+        AlignWithMargins = True
+        Left = 3
+        Top = 44
+        Width = 596
+        Height = 66
+        Align = alTop
+        Brush.Color = 6574152
+        Pen.Style = psClear
+        Shape = stRoundRect
+        OnMouseDown = Dragging
+        ExplicitLeft = 6
+        ExplicitTop = 52
+      end
+      object spdbtnStartDevicesARP: TSpeedButton
+        Tag = 1
+        Left = 15
+        Top = 52
+        Width = 250
+        Height = 50
+        Action = actStartDevices
+        Caption = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100'(arp -a)'
+        Flat = True
+      end
+      object spdbtnStartDevicesPing: TSpeedButton
+        Tag = 2
+        Left = 334
+        Top = 52
+        Width = 250
+        Height = 50
+        Action = actStartDevices
+        Caption = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100'(Ping)'
+        Flat = True
+      end
+      object pDevices: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 116
+        Width = 596
+        Height = 565
+        Align = alTop
+        BevelOuter = bvNone
+        Color = 6574152
+        Padding.Left = 10
+        Padding.Right = 10
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 0
+        object mmDevices: TMemo
+          AlignWithMargins = True
+          Left = 13
+          Top = 10
+          Width = 570
+          Height = 545
+          Margins.Top = 10
+          Margins.Bottom = 10
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = bsNone
+          Color = 6574152
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 0
         end
       end
     end
@@ -224,7 +321,7 @@ object frmMain: TfrmMain
     ShowCaption = False
     TabOrder = 1
     OnMouseDown = Dragging
-    object spdbtnTurningGrille: TSpeedButton
+    object spdbtnWelcome: TSpeedButton
       AlignWithMargins = True
       Left = 3
       Top = 8
@@ -244,10 +341,10 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       Margin = 10
       ParentFont = False
-      Spacing = 20
+      Spacing = 15
       ExplicitLeft = 0
     end
-    object spdbtnVigenere: TSpeedButton
+    object spdbtnInterfaces: TSpeedButton
       Tag = 1
       AlignWithMargins = True
       Left = 3
@@ -256,7 +353,7 @@ object frmMain: TfrmMain
       Height = 50
       Action = actChooseOption
       Align = alTop
-      Caption = #1057#1082#1072#1085#1077#1088
+      Caption = #1048#1085#1090#1077#1088#1092#1077#1081#1089#1099
       ImageIndex = 6
       ImageName = 'radar'
       Images = vilButtons48
@@ -268,7 +365,7 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       Margin = 10
       ParentFont = False
-      Spacing = 20
+      Spacing = 15
       ExplicitLeft = 4
     end
     object spdbtnExit: TSpeedButton
@@ -291,11 +388,11 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       Margin = 10
       ParentFont = False
-      Spacing = 20
+      Spacing = 15
       ExplicitLeft = 4
     end
     object spdbtnHelp: TSpeedButton
-      Tag = 2
+      Tag = 3
       AlignWithMargins = True
       Left = 3
       Top = 580
@@ -315,9 +412,34 @@ object frmMain: TfrmMain
       Font.Style = [fsBold]
       Margin = 10
       ParentFont = False
-      Spacing = 20
+      Spacing = 15
       ExplicitLeft = 4
       ExplicitTop = 587
+    end
+    object spdbtnDevices: TSpeedButton
+      Tag = 2
+      AlignWithMargins = True
+      Left = 3
+      Top = 120
+      Width = 179
+      Height = 50
+      Action = actChooseOption
+      Align = alTop
+      Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1072
+      ImageIndex = 6
+      ImageName = 'radar'
+      Images = vilButtons48
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16481792
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Margin = 10
+      ParentFont = False
+      Spacing = 15
+      ExplicitLeft = 0
+      ExplicitTop = 136
     end
   end
   object vilButtons48: TVirtualImageList
@@ -375,16 +497,17 @@ object frmMain: TfrmMain
       Category = 'Form'
       OnExecute = actChooseOptionExecute
     end
-    object actStartScan: TAction
+    object actStartInterfaces: TAction
       Category = 'Scaner'
-      OnExecute = actStartScanExecute
-    end
-    object actSaveFile: TAction
-      Category = 'Scaner'
+      OnExecute = actStartInterfacesExecute
     end
     object actGoToGithub: TAction
       Category = 'Form'
       OnExecute = actGoToGithubExecute
+    end
+    object actStartDevices: TAction
+      Category = 'Scaner'
+      OnExecute = actStartDevicesExecute
     end
   end
 end
