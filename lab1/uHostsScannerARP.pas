@@ -1,4 +1,4 @@
-Unit uHostsScanner;
+Unit uHostsScannerARP;
 
 Interface
 
@@ -32,20 +32,18 @@ Type
         Table: PMibIPNetRow;
     End;
 
-    // exported
+    { exported }
 Function GetIpNetTable(PIpNetTable: PMibIPNetTable; PdwSize: PULONG; BOrder: Boolean): DWORD; Stdcall;
     External IPHLPAPI;
 Function SendARP(DestIp: DWORD; SrcIP: DWORD; PMacAddr: Pointer; PhyAddrLen: Pointer): DWORD; Stdcall;
     External 'iphlpapi.dll';
 
-// my
 Procedure ScanDevicesARP(Answer: TStringList);
-Procedure ScanDevicesPing(Answer: TStringList);
 
 Implementation
 
-{ Devices - ARP }
-
+{ Devices - ARP sending }
+// next 3 funcs may be local and replaced into ScanDevicesARP
 Function GetMAC(Const Value: TMacAddress; Const Length: DWORD): String;
 Begin
     If Length = 0 Then
@@ -87,7 +85,7 @@ Var
     MibIPNetTable: PMibIPNetTable;
     MibIPNetRow: PMibIPNetRow;
     PdwSize: ULONG;
-    I, NumberOfEntries: Integer;
+    I, Index, NumberOfEntries: Integer;
     InternetAddress, PhysicalAddress, AType: String;
 Begin
     If GetIpNetTable(Nil, @PdwSize, False) = ERROR_INSUFFICIENT_BUFFER Then
@@ -96,17 +94,28 @@ Begin
         Try
             If GetIpNetTable(MibIPNetTable, @PdwSize, False) = NO_ERROR Then
             Begin
-                Answer.Add('Internet Address |  Physical Address  |  Type');
-                Answer.Add('----------------------------------------------');
+                // monospace font is required for correct display
+                // e.g. Courier New
+                Answer.Add('Internet Address |  Physical Address  |   Type   |  Index');
+                Answer.Add('----------------------------------------------------------');
 
                 MibIPNetRow := Pointer(DWORD(MibIPNetTable) + SizeOf(DWORD));
                 NumberOfEntries := MibIPNetTable^.DwNumEntries;
                 For I := 1 To NumberOfEntries Do
                 Begin
+                    Index := MibIPNetRow^.DwIndex;
+                    AType := GetType(MibIPNetRow^.DwType);
+
+                    If AType = 'Invalid' Then
+                    Begin
+                        Inc(MibIPNetRow);
+                        Continue;
+                    End;
+
                     InternetAddress := GetDottedIPFromInAddr(MibIPNetRow^.DwAddr);
                     PhysicalAddress := GetMAC(MibIPNetRow^.BPhysAddr, MibIPNetRow^.DwPhysAddrLen);
-                    AType := GetType(MibIPNetRow^.DwType);
-                    Answer.Add(Format('%-16s | %-18s | %-10s', [InternetAddress, PhysicalAddress, AType]));
+
+                    Answer.Add(Format('%-16s | %-18s | %-8s | %5d ', [InternetAddress, PhysicalAddress, AType, Index]));
                     Inc(MibIPNetRow);
                 End;
             End;
@@ -114,13 +123,6 @@ Begin
             FreeMem(MibIPNetTable);
         End;
     End;
-End;
-
-{ Devices - Ping }
-
-Procedure ScanDevicesPing(Answer: TStringList);
-Begin
-    //
 End;
 
 End.

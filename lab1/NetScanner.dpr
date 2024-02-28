@@ -6,7 +6,8 @@ uses
   udtmdImages in 'udtmdImages.pas' {dtmdImages: TDataModule},
   uInterfacesScanner in 'uInterfacesScanner.pas',
   uFormEnhances in 'uFormEnhances.pas',
-  uHostsScanner in 'uHostsScanner.pas';
+  uHostsScannerARP in 'uHostsScannerARP.pas',
+  uHostsScannerPing in 'uHostsScannerPing.pas';
 
 {$R *.res}
 
