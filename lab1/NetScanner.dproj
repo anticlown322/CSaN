@@ -146,7 +146,8 @@
         </DCCReference>
         <DCCReference Include="uInterfacesScanner.pas"/>
         <DCCReference Include="uFormEnhances.pas"/>
-        <DCCReference Include="uHostsScanner.pas"/>
+        <DCCReference Include="uHostsScannerARP.pas"/>
+        <DCCReference Include="uHostsScannerPing.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

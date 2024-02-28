@@ -50,7 +50,7 @@ Type
         LbHelp: TLabel;
         LbHelpTitle: TLabel;
         LbInterfacesTitle: TLabel;
-        POutput: TPanel;
+    pInterfaces: TPanel;
         MmInterfacesOutput: TMemo;
         ShpInterfaces: TShape;
         SpdbtnInterfacesIPHlp: TSpeedButton;
@@ -66,6 +66,8 @@ Type
         ActStartDevices: TAction;
         SpdbtnStartDevicesARP: TSpeedButton;
         SpdbtnStartDevicesPing: TSpeedButton;
+        CbbIP: TComboBox;
+        TmrCheckInterfaces: TTimer;
         Procedure Dragging(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer); // custom
         Procedure ActCloseExecute(Sender: TObject);
         Procedure FormShow(Sender: TObject);
@@ -74,6 +76,7 @@ Type
         Procedure ActGoToGithubExecute(Sender: TObject);
         Procedure ActStartInterfacesExecute(Sender: TObject);
         Procedure ActStartDevicesExecute(Sender: TObject);
+        Procedure TmrCheckInterfacesTimer(Sender: TObject);
     End;
 
 Var
@@ -85,8 +88,11 @@ Uses
     UdtmdImages,
     UFormEnhances,
     ShellApi,
-    UHostsScanner,
-    UInterfacesScanner;
+    UHostsScannerARP,
+    UInterfacesScanner,
+    UHostsScannerPing,
+    Iphlpapi,
+    IpTypes;
 
 {$R *.dfm}
 { form methods }
@@ -99,7 +105,38 @@ End;
 Procedure TfrmMain.FormShow(Sender: TObject);
 Begin
     RoundFormCorners(Self, CtRoundedCornerDefault);
-    RoundCornerOf(POutput, CtRoundedCornerDefault);
+    RoundCornerOf(Pdevices, CtRoundedCornerDefault);
+    RoundCornerOf(pInterfaces, CtRoundedCornerDefault);
+End;
+
+Procedure TfrmMain.TmrCheckInterfacesTimer(Sender: TObject);
+Var
+    PAdapterInfo, PAdapter: PIP_ADAPTER_INFO;
+    BufLen, Status: DWORD;
+Begin
+    CbbIP.Clear;
+    GetAdaptersInfo(Nil, BufLen);
+    PAdapterInfo := AllocMem(BufLen);
+    Try
+        Status := GetAdaptersInfo(PAdapterInfo, BufLen);
+
+        If (Status <> ERROR_SUCCESS) Then
+        Begin
+            CbbIP.Text := 'Нет адаптеров';
+            Exit;
+        End;
+
+        PAdapter := PAdapterInfo;
+
+        While (PAdapter <> Nil) Do
+        Begin
+            If PAdapter^.IpAddressList.IpAddress.S <> '0.0.0.0' Then
+                CbbIP.Items.Add(PAdapter^.IpAddressList.IpAddress.S);
+            PAdapter := PAdapter^.Next;
+        End;
+    Finally
+        FreeMem(PAdapterInfo);
+    End;
 End;
 
 Procedure TFrmMain.Dragging(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -130,18 +167,21 @@ Var
     Answer: TStringlist;
 Begin
     MmDevices.Clear;
-    Answer := TStringlist.Create;
 
     Case (Sender As TAction).ActionComponent.Tag Of
         1:
-            ScanDevicesARP(Answer);
-        2:
             Begin
+                Answer := TStringlist.Create;
+                ScanDevicesARP(Answer);
+                MmDevices.Text := Answer.Text;
+                Answer.Free;
             End;
+        2:
+            If CbbIP.Text <> '' Then
+                ScanDevicesPing(CbbIP.Text, MmDevices.Lines)
+            Else
+                Messagebox(Handle, Pchar('Выберите один из существующих интерфейсов'), Pchar('Ошибка!'), MB_ICONSTOP + MB_OK);
     End;
-
-    MmDevices.Text := Answer.Text;
-    Answer.Free;
 End;
 
 { action manager - form }
