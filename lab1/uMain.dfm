@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 610
     Height = 694
-    ActivePage = tsDevices
+    ActivePage = tsInterfaces
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 0
@@ -103,7 +103,7 @@ object frmMain: TfrmMain
         Caption = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100'(WinAPI)'
         Flat = True
       end
-      object pOutput: TPanel
+      object pInterfaces: TPanel
         AlignWithMargins = True
         Left = 3
         Top = 116
@@ -111,7 +111,6 @@ object frmMain: TfrmMain
         Height = 565
         Align = alTop
         BevelOuter = bvNone
-        Caption = 'pVigenereInput'
         Color = 6574152
         Padding.Left = 10
         Padding.Right = 10
@@ -171,14 +170,12 @@ object frmMain: TfrmMain
         Left = 3
         Top = 44
         Width = 596
-        Height = 66
+        Height = 101
         Align = alTop
         Brush.Color = 6574152
         Pen.Style = psClear
         Shape = stRoundRect
         OnMouseDown = Dragging
-        ExplicitLeft = 6
-        ExplicitTop = 52
       end
       object spdbtnStartDevicesARP: TSpeedButton
         Tag = 1
@@ -203,9 +200,9 @@ object frmMain: TfrmMain
       object pDevices: TPanel
         AlignWithMargins = True
         Left = 3
-        Top = 116
+        Top = 151
         Width = 596
-        Height = 565
+        Height = 530
         Align = alTop
         BevelOuter = bvNone
         Color = 6574152
@@ -219,7 +216,7 @@ object frmMain: TfrmMain
           Left = 13
           Top = 10
           Width = 570
-          Height = 545
+          Height = 510
           Margins.Top = 10
           Margins.Bottom = 10
           Align = alClient
@@ -229,7 +226,7 @@ object frmMain: TfrmMain
           Color = 6574152
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWhite
-          Font.Height = -13
+          Font.Height = -15
           Font.Name = 'Courier New'
           Font.Style = []
           ParentFont = False
@@ -237,6 +234,24 @@ object frmMain: TfrmMain
           ScrollBars = ssVertical
           TabOrder = 0
         end
+      end
+      object cbbIP: TComboBox
+        Left = 353
+        Top = 105
+        Width = 206
+        Height = 31
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Style = csDropDownList
+        Color = 4928301
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Sorted = True
+        TabOrder = 1
       end
     end
     object tsHelp: TTabSheet
@@ -425,7 +440,7 @@ object frmMain: TfrmMain
       Height = 50
       Action = actChooseOption
       Align = alTop
-      Caption = #1059#1089#1090#1088#1086#1081#1089#1090#1074#1072
+      Caption = #1061#1086#1089#1090#1099
       ImageIndex = 6
       ImageName = 'radar'
       Images = vilButtons48
@@ -509,5 +524,11 @@ object frmMain: TfrmMain
       Category = 'Scaner'
       OnExecute = actStartDevicesExecute
     end
+  end
+  object tmrCheckInterfaces: TTimer
+    Interval = 5000
+    OnTimer = tmrCheckInterfacesTimer
+    Left = 136
+    Top = 24
   end
 end

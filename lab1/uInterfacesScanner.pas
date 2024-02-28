@@ -140,6 +140,8 @@ Var
     PAddrIP, PAddrSubnetMask: SockAddr_In;
     NetAddrDummy: In_Addr;
     Buffer: Array [0 .. 30] Of InterfaceInfo;
+    ComputerName: Array [0 .. 256] Of Char;
+    Size: DWORD;
     I, NumOfInterfaces: Integer;
     ErrCode: Cardinal;
 Begin
@@ -178,6 +180,9 @@ Begin
                     // subnet mask
                     PAddrSubnetMask := Buffer[I].IiNetMask.AddressIn;
                     SubnetMask := String(Inet_ntoa(PAddrSubnetMask.Sin_Addr));
+
+                    GetComputerName(ComputerName, Size);
+                    Name := ComputerName;
 
                     // net
                     NetAddrDummy.S_addr := Buffer[I].IiAddress.AddressIn.Sin_Addr.S_Addr;
