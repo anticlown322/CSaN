@@ -1,13 +1,11 @@
-Program NetScanner;
+Program Client;
 
 uses
   Vcl.Forms,
-  uMain in 'uMain.pas' {frmMain},
+  uClient in 'uClient.pas' {frmMain},
   udtmdImages in 'udtmdImages.pas' {dtmdImages: TDataModule},
-  uInterfacesScanner in 'uInterfacesScanner.pas',
   uFormEnhances in 'uFormEnhances.pas',
-  uHostsScannerARP in 'uHostsScannerARP.pas',
-  uHostsScannerPing in 'uHostsScannerPing.pas';
+  uConnect in 'uConnect.pas' {frmConnect};
 
 {$R *.res}
 
