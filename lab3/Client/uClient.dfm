@@ -70,6 +70,166 @@ object frmMain: TfrmMain
         OnMouseDown = Dragging
         ExplicitWidth = 175
       end
+      object pFileOptions: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 600
+        Width = 596
+        Height = 81
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 6574152
+        Padding.Left = 8
+        Padding.Top = 10
+        Padding.Right = 8
+        Padding.Bottom = 10
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 0
+        object spdbtnGET: TSpeedButton
+          Tag = 1
+          AlignWithMargins = True
+          Left = 18
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'GET'
+          Images = vilButtons48
+          Flat = True
+        end
+        object spdbtnPUT: TSpeedButton
+          Tag = 2
+          AlignWithMargins = True
+          Left = 113
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'PUT'
+          Images = vilButtons48
+          Flat = True
+        end
+        object spdbtnDELETE: TSpeedButton
+          Tag = 6
+          AlignWithMargins = True
+          Left = 493
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'DEL'
+          Images = vilButtons48
+          Flat = True
+          ExplicitLeft = 303
+        end
+        object spdbtnMOVE: TSpeedButton
+          Tag = 4
+          AlignWithMargins = True
+          Left = 303
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'MOVE'
+          Images = vilButtons48
+          Flat = True
+          ExplicitLeft = 208
+        end
+        object spdbtnPOST: TSpeedButton
+          Tag = 5
+          AlignWithMargins = True
+          Left = 398
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'POST'
+          Images = vilButtons48
+          Flat = True
+          ExplicitLeft = 303
+        end
+        object spdbtnCOPY: TSpeedButton
+          Tag = 3
+          AlignWithMargins = True
+          Left = 208
+          Top = 10
+          Width = 75
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actChooseRESTMethod
+          Align = alLeft
+          Caption = 'COPY'
+          Images = vilButtons48
+          Flat = True
+        end
+      end
+      object pLogs: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 44
+        Width = 596
+        Height = 550
+        Align = alClient
+        BevelOuter = bvNone
+        Caption = 'pLogs'
+        Color = 6574152
+        Padding.Left = 10
+        Padding.Right = 10
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 1
+        object mmLogs: TMemo
+          AlignWithMargins = True
+          Left = 13
+          Top = 10
+          Width = 570
+          Height = 530
+          Margins.Top = 10
+          Margins.Bottom = 10
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = bsNone
+          Color = 6574152
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWhite
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
     end
     object tsHelp: TTabSheet
       Caption = 'tsHelp'
@@ -79,8 +239,8 @@ object frmMain: TfrmMain
         AlignWithMargins = True
         Left = 10
         Top = 46
-        Width = 582
-        Height = 606
+        Width = 574
+        Height = 253
         Margins.Left = 10
         Margins.Right = 10
         Align = alClient
@@ -94,14 +254,12 @@ object frmMain: TfrmMain
           #1093' '#1093#1088#1072#1085#1080#1083#1080#1097#1072
         WordWrap = True
         OnMouseDown = Dragging
-        ExplicitWidth = 574
-        ExplicitHeight = 253
       end
       object lbHelpTitle: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 5
-        Width = 596
+        Width = 116
         Height = 33
         Margins.Top = 5
         Margins.Bottom = 5
@@ -117,13 +275,12 @@ object frmMain: TfrmMain
         ParentColor = False
         ParentFont = False
         OnMouseDown = Dragging
-        ExplicitWidth = 116
       end
       object lbTradeMark: TLabel
         AlignWithMargins = True
-        Left = 3
+        Left = 502
         Top = 658
-        Width = 596
+        Width = 97
         Height = 23
         Align = alBottom
         Alignment = taRightJustify
@@ -135,8 +292,6 @@ object frmMain: TfrmMain
         Font.Style = []
         ParentFont = False
         OnClick = actGoToGithubExecute
-        ExplicitLeft = 502
-        ExplicitWidth = 97
       end
     end
   end
@@ -300,6 +455,10 @@ object frmMain: TfrmMain
       Category = 'Form'
       OnExecute = actGoToGithubExecute
     end
+    object actChooseRESTMethod: TAction
+      Category = 'Client'
+      OnExecute = actChooseRESTMethodExecute
+    end
   end
   object vilButtons32: TVirtualImageList
     Images = <
@@ -323,5 +482,16 @@ object frmMain: TfrmMain
     Height = 32
     Left = 40
     Top = 80
+  end
+  object httpcltClient: TNetHTTPClient
+    UserAgent = 'Embarcadero URI Client/1.0'
+    Left = 48
+    Top = 200
+  end
+  object httprqtReq: TNetHTTPRequest
+    URL = 'http://localhost:8080/'
+    Client = httpcltClient
+    Left = 48
+    Top = 264
   end
 end

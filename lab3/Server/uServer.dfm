@@ -112,7 +112,7 @@ object frmMain: TfrmMain
         Left = 3
         Top = 44
         Width = 596
-        Height = 637
+        Height = 550
         Align = alClient
         BevelOuter = bvNone
         Color = 6574152
@@ -121,9 +121,81 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitTop = 79
-        ExplicitWidth = 367
-        ExplicitHeight = 515
+        object mmLogs: TMemo
+          AlignWithMargins = True
+          Left = 13
+          Top = 10
+          Width = 570
+          Height = 530
+          Margins.Top = 10
+          Margins.Bottom = 10
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          BorderStyle = bsNone
+          Color = 6574152
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWhite
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
+      object pServerOptions: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 600
+        Width = 596
+        Height = 81
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 6574152
+        Padding.Left = 8
+        Padding.Top = 10
+        Padding.Right = 8
+        Padding.Bottom = 10
+        ParentBackground = False
+        ShowCaption = False
+        TabOrder = 1
+        object spdbtnServerStart: TSpeedButton
+          Tag = 1
+          AlignWithMargins = True
+          Left = 18
+          Top = 10
+          Width = 200
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actStartServer
+          Align = alLeft
+          Caption = #1047#1072#1087#1091#1089#1090#1080#1090#1100
+          Images = vilButtons48
+          Flat = True
+          ExplicitLeft = 13
+        end
+        object spdbtnServerStop: TSpeedButton
+          Tag = 2
+          AlignWithMargins = True
+          Left = 378
+          Top = 10
+          Width = 200
+          Height = 61
+          Margins.Left = 10
+          Margins.Top = 0
+          Margins.Right = 10
+          Margins.Bottom = 0
+          Action = actStopServer
+          Align = alRight
+          Caption = #1054#1089#1090#1072#1085#1086#1074#1080#1090#1100
+          Images = vilButtons48
+          Flat = True
+          ExplicitLeft = 233
+        end
       end
     end
     object tsHelp: TTabSheet
@@ -353,8 +425,8 @@ object frmMain: TfrmMain
     Top = 24
   end
   object actmngActions: TActionManager
-    Left = 72
-    Top = 24
+    Left = 40
+    Top = 80
     StyleName = 'Platform Default'
     object actClose: TAction
       Category = 'Form'
@@ -368,5 +440,21 @@ object frmMain: TfrmMain
       Category = 'Form'
       OnExecute = actGoToGithubExecute
     end
+    object actStartServer: TAction
+      Category = 'Server'
+      OnExecute = actStartServerExecute
+    end
+    object actStopServer: TAction
+      Category = 'Server'
+      OnExecute = actStopServerExecute
+    end
+  end
+  object htpsvrServer: TIdHTTPServer
+    Bindings = <>
+    DefaultPort = 1488
+    OnCommandOther = htpsvrServerCommandOther
+    OnCommandGet = htpsvrServerCommandGet
+    Left = 40
+    Top = 152
   end
 end
