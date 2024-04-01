@@ -1,10 +1,10 @@
 Program Client;
 
-Uses
-    Vcl.Forms,
-    UClient In 'uClient.pas' {frmMain} ,
-    UdtmdImages In 'udtmdImages.pas' {dtmdImages: TDataModule} ,
-    UFormEnhances In 'uFormEnhances.pas';
+uses
+  Vcl.Forms,
+  uClient in 'uClient.pas' {frmMain},
+  udtmdImages in 'udtmdImages.pas' {dtmdImages: TDataModule},
+  uFormEnhances in 'uFormEnhances.pas';
 
 {$R *.res}
 
@@ -13,7 +13,7 @@ Begin
     Application.MainFormOnTaskbar := False;
 
     Application.CreateForm(TFrmMain, FrmMain);
-    Application.CreateForm(TDtmdImages, DtmdImages);
-    Application.Run;
+  Application.CreateForm(TDtmdImages, DtmdImages);
+  Application.Run;
 
 End.
