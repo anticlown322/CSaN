@@ -1,4 +1,4 @@
-Program Client;
+Program PortFinder;
 
 uses
   Vcl.Forms,
