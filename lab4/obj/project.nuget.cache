@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "c55ORLyJkqhE17HWLkVbGkQLvZH6u3IHWoLoGQavyoZTFldwj0l9nuusTh+CCnhscAZkXrNrLVXHc0EFIzyjjg==",
+  "success": true,
+  "projectFilePath": "D:\\DelphiProjects\\Лабы\\CSaN\\lab4\\lab4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Andrey\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512"
+  ],
+  "logs": []
+}
