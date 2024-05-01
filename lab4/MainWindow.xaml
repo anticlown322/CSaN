@@ -43,8 +43,12 @@
             <Border Grid.RowSpan="4" 
                     Background="#1e2e44" 
                     CornerRadius="25 0 0 25">
-                <StackPanel Margin="0 70 0 65">
-
+                <StackPanel Margin="0 75 0 0">
+                    <Button x:Name="btnSearch" 
+                        Margin="0 10 0 0" 
+                        Click="btnSearch_Click">
+                        <Image x:Name="imgSearch"/>
+                    </Button>
                 </StackPanel>
             </Border>
 
@@ -72,10 +76,13 @@
                 </Button>
             </Grid>
             
-            <m:Map Grid.Column="1"
+            <m:Map x:Name="mapka"
+                   Grid.Column="1"
                    Grid.Row="1"
                    CredentialsProvider="Au8FGsfED36cKn7rjViVNTZlg7iRs9Oq8YJlBJuTztBTpb2E2IVPkUshSOKJqexI"
-                ></m:Map>
+                >
+                
+            </m:Map>
         </Grid>
     </Border>
 </Window>
